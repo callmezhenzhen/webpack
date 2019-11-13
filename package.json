@@ -1,0 +1,22 @@
+{
+  "name": "buddler",
+  "version": "1.0.0",
+  "description": "learning webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/callmezhenzhen/webpack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/callmezhenzhen/webpack/issues"
+  },
+  "homepage": "https://github.com/callmezhenzhen/webpack#readme",
+  "dependencies": {
+    "webpack": "^4.41.2"
+  }
+}
