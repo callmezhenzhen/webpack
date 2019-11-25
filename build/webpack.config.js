@@ -1,4 +1,5 @@
 const path = require('path');
+const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     // 用于解析entry和module.rules.loader选项
@@ -6,8 +7,9 @@ module.exports = {
     entry: './main.js',
     output: {
         path: path.resolve(__dirname, '../dist'),
-        filename: 'bundle.js'
+        filename: '[chunkhash].bundle.js'
     },
+    // loaders
     module: {
         rules: [
             {
@@ -17,6 +19,13 @@ module.exports = {
                 loader: 'babel-loader'
             }
         ]
-    }
+    },
+    // plugins
+    plugins: [
+        new htmlWebpackPlugin({
+            title: 'learning webpack',
+            filename: 'index.html'
+        })
+    ]
 };
 
