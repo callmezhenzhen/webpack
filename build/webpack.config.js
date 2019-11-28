@@ -1,5 +1,6 @@
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
     // 用于解析entry和module.rules.loader选项
@@ -20,6 +21,13 @@ module.exports = {
         // 端口号
         port: 9000
     },
+    resolve: {
+        extensions: ['.js', '.vue', '*'],
+        alias: {
+            '@': path.resolve(__dirname, '../src'),
+            'vue$': 'vue/dist/vue.esm.js'
+        }
+    },
     // loaders
     module: {
         rules: [
@@ -28,6 +36,18 @@ module.exports = {
                 // 结合context选项
                 include: '/',
                 loader: 'babel-loader'
+            },
+            // 处理.vue文件
+            {
+                test: /\.vue$/,
+                include: '/',
+                loader: 'vue-loader'
+            },
+            // 处理css文件
+            {
+                test: /\.css$/,
+                include: '/',
+                use: ['style-loader', 'css-loader']
             }
         ]
     },
@@ -38,7 +58,10 @@ module.exports = {
             title: 'learning webpack',
             // 指定模版
             template: 'index.html'
-        })
-    ]
+        }),
+        // 配合vue-loader使用
+        new VueLoaderPlugin()
+    ],
+    mode: 'development'
 };
 
