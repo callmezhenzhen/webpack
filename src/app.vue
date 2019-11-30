@@ -1,9 +1,16 @@
 <template>
-    <div class="title">{{msg}}</div>
+    <div>
+        <div class="title">{{msg}}</div>
+        <bar></bar>
+    </div>
 </template>
 <script>
+import bar from '@/components/bar.vue';
 export default {
     name: 'App',
+    components: {
+        bar
+    },
     data() {
         return {
             msg: 'Hello vue'

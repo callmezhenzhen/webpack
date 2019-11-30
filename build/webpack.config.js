@@ -1,6 +1,8 @@
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     // 用于解析entry和module.rules.loader选项
@@ -47,12 +49,17 @@ module.exports = {
             {
                 test: /\.css$/,
                 include: '/',
-                use: ['style-loader', 'css-loader']
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader'
+                })
+                // use: ['style-loader', 'css-loader']
             }
         ]
     },
     // plugins
     plugins: [
+        new CleanWebpackPlugin(),
         new htmlWebpackPlugin({
             // 页面title
             title: 'learning webpack',
@@ -60,7 +67,9 @@ module.exports = {
             template: 'index.html'
         }),
         // 配合vue-loader使用
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        // 抽离css
+        new ExtractTextPlugin('[md5:contenthash:hex:20].style.css')
     ],
     mode: 'development'
 };
