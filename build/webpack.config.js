@@ -3,6 +3,7 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
     // 用于解析entry和module.rules.loader选项
@@ -77,7 +78,8 @@ module.exports = {
         // 配合vue-loader使用
         new VueLoaderPlugin(),
         // 抽离css
-        new ExtractTextPlugin('[md5:contenthash:hex:20].style.css')
+        new ExtractTextPlugin('[md5:contenthash:hex:20].style.css'),
+        new OptimizeCssAssetsPlugin()
     ],
     mode: 'development'
 };
