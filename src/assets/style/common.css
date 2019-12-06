@@ -4,3 +4,6 @@
 .flex1 {
     flex: 1;
 }
+::placeholder {
+    color: gray;
+}

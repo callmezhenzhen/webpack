@@ -2,8 +2,7 @@ const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     // 用于解析entry和module.rules.loader选项
@@ -50,19 +49,32 @@ module.exports = {
             {
                 test: /\.css$/,
                 include: '/',
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: 'css-loader'
-                })
+                use: [
+                    'style-loader', 
+                    {
+                        loader: 'css-loader',
+                        options: { 
+                            importLoaders: 1 
+                        }
+                    }, 
+                    'postcss-loader'
+                ]
             },
             // 处理less
             {
                 test: /\.less$/,
                 include: '/',
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader', 'less-loader']
-                })
+                use: [
+                    'style-loader', 
+                    {
+                        loader: 'css-loader',
+                        options: { 
+                            importLoaders: 1 
+                        }
+                    }, 
+                    'postcss-loader',
+                    'less-loader'
+                ]
             }
         ]
     },
@@ -78,8 +90,7 @@ module.exports = {
         // 配合vue-loader使用
         new VueLoaderPlugin(),
         // 抽离css
-        new ExtractTextPlugin('[md5:contenthash:hex:20].style.css'),
-        new OptimizeCssAssetsPlugin()
+        // new ExtractTextPlugin('[md5:contenthash:hex:20].style.css'),
     ],
     mode: 'development'
 };
