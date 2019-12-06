@@ -2,6 +2,10 @@
     <div>
         <div class="title">{{msg}}</div>
         <bar></bar>
+        <router-link to="/pageone">pageone</router-link>
+        <router-link to="/pagetwo">pagetwo</router-link>
+        <!-- 路由匹配到的组件将渲染到这里 -->
+        <router-view></router-view>
     </div>
 </template>
 <script>
