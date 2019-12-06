@@ -12,8 +12,4 @@ const routes = [
         component: (resolve) => require(['@/pages/pagetwo'], resolve)
     }
 ]
-const router = new VueRouter({ routes });
-
-module.exports = {
-    router
-}
+export const router = new VueRouter({ routes });
