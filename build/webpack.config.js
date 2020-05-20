@@ -24,7 +24,7 @@ module.exports = {
         port: 9000
     },
     resolve: {
-        extensions: ['.js', '.vue', '*'],
+        extensions: ['.ts', '.tsx', '.js', '.vue', '*'],
         alias: {
             '@': path.resolve(__dirname, '../src'),
             'vue$': 'vue/dist/vue.esm.js'
@@ -38,6 +38,14 @@ module.exports = {
                 // 结合context选项
                 include: '/',
                 loader: 'babel-loader'
+            },
+            {
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                // exclude: /node_modules/,
+                options: { 
+                    appendTsSuffixTo: [/\.vue$/] 
+                }
             },
             // 处理.vue文件
             {
